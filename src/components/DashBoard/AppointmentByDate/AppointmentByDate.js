@@ -1,15 +1,22 @@
 import React from 'react';
+import AppointmentDataTable from '../AppointmentDataTable/AppointmentDataTable';
+import AppointmentShortList from '../AppointmentShortList/AppointmentShortList';
 
-const AppointmentByDate = ({appointment}) => {
+const AppointmentsByDate = ({ appointment }) => {
     console.log(appointment);
     return (
         <div>
-            <h2>appointment: {appointment.length}</h2>
+            <h2 className="text-brand text-center">Appointments</h2>
             {
-                appointment.map(app => <li key={app._id}>{app.name}</li>)
+                appointment.length ?
+                 <AppointmentShortList appointment={appointment} ></AppointmentShortList>
+                :
+                <div className="p-5">
+                    <h4 className="lead text-center">No Appointments for this Date</h4>
+                </div>
             }
         </div>
     );
 };
 
-export default AppointmentByDate;
+export default AppointmentsByDate;

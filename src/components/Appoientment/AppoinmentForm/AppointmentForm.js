@@ -15,18 +15,23 @@ const customStyles = {
 
 Modal.setAppElement('#root')
 
-
+const formateDate = (d) => {
+    var date = new Date(d);
+    var newdata = (((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear());
+    return newdata;
+}
 
 const AppointmentForm = ({modalIsOpen, closeModal, appointmentOn, date}) => {
     const { register, handleSubmit, errors } = useForm();
 
 
-
+   
 
 
     const onSubmit = data => {
       data.service = appointmentOn;
-      data.date = date;
+
+      data.date = formateDate(date);
       data.created = new Date();
         fetch('http://localhost:5000/addAppointment',{
             method: 'POST',
